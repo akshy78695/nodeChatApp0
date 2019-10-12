@@ -3,14 +3,6 @@
 
     socket.on('connect', function() {
         console.log('connected to server');
-    
-        
-
-        socket.emit('createMessage', {
-            from: 'akshay@msg.com',
-            text: "kaisan ba (by msgnger)",
-            createdAt: new Date().now
-        });
     });
 
     socket.on('disconnect', function() {
