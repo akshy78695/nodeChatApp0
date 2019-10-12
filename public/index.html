@@ -4,22 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>localHost 3000</title>
 </head>
 <body>
     <h4>Hello World</h4>
 
     <script src="socket.io/socket.io.js"></script>
-    <script>
-    let socket = io();
-
-    socket.on('connect', () => {
-        console.log('connected to server');
-    });
-
-    socket.on('disconnect', () => {
-        console.log('disconnected to server');
-    });
-    </script>
+    <script src="./js/index.js"></script>
 </body>
 </html>
