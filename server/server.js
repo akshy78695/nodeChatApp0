@@ -22,12 +22,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('newMessage', generateMessage('admin', 'new User joined'));
 
     socket.on('createMessage', (message) => {
-        console.log('A New Message : ', message);
-        io.emit('newMessage', {
-            from: message.from,
-            text: message.text,
-            createdAt: new Date().getTime()
-        }, generateMessage(message.from, message.text));
+        io.emit('newMessage', generateMessage(message.from, message.text));
         // socket.broadcast.emit('newMessage', {
         //     from: message.from,
         //     text: message.text,
