@@ -3,7 +3,7 @@ const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
 
-let {generateMessage} = require('./utails/message');
+let {generateMessage, generateLocationMessage} = require('./utails/message');
 
 publicPath = path.join(__dirname, '../public');
 let port = process.env.PORT || 3000;
@@ -30,6 +30,10 @@ io.on('connection', (socket) => {
         // });
     });
 
+    socket.on('createLocationMessage', (coords) => {
+        io.emit('newLocationMessage', generateLocationMessage('User', coords.latitude, coords.longitude));
+        console.log(coords);
+    });
 
     socket.on('disconnect', () => {
         console.log('user disconnected');

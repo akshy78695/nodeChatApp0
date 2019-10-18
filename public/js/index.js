@@ -20,6 +20,18 @@
         
     });
 
+    socket.on('newLocationMessage', function(message){
+        let li = $('<li></li>')
+        let a = $('<a target="_blank">Location</a>');
+
+        li.text(`${message.from}: `);
+        a.attr('href', message.url);
+
+        li.append(a);
+
+        $('#messages').append(li);
+    });
+
     $('#send').click(function(e) {
         e.preventDefault();
 
@@ -28,5 +40,22 @@
             text: $('#msg-input').val()
         }, function() {
 
+        });
+    });
+
+    let locationButton = $('#send-location');
+
+    locationButton.click(function(){
+        if(!navigator.geolocation){
+            return alert('Geolocation is not supported by your browser');
+        }
+
+        navigator.geolocation.getCurrentPosition(function(position){
+            socket.emit('createLocationMessage', {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            });
+        }, function(){
+            alert('Unable to fatch location');
         });
     });
