@@ -34,12 +34,12 @@
 
     $('#send').click(function(e) {
         e.preventDefault();
-
+        
         socket.emit('createMessage', {
             from: "user",
             text: $('#msg-input').val()
         }, function() {
-
+            $('input[name=message]').val("");
         });
     });
 
@@ -50,12 +50,16 @@
             return alert('Geolocation is not supported by your browser');
         }
 
+        locationButton.attr('disabled', 'disabled').text('Sending');
+
         navigator.geolocation.getCurrentPosition(function(position){
+            locationButton.removeAttr('disabled').text('Send location');
             socket.emit('createLocationMessage', {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             });
         }, function(){
+            locationButton.removeAttr('disabled').text('Send location');
             alert('Unable to fatch location');
         });
     });
