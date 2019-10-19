@@ -11,20 +11,22 @@
 
 
     socket.on('newMessage', function(message){
-        console.log('a New Message', message);
+        let time = moment(message.createdAt).format('h:mm a');
 
         let li = $('<li></li>');
-        li.text(`${message.from}: ${message.text}`);
+        li.text(`${message.from} ${time}: ${message.text}`);
 
         $('#messages').append(li);
         
     });
 
     socket.on('newLocationMessage', function(message){
+        let time = moment(message.createdAt).format('h:mm a');
+        console.log(message, 'aksdjasjk');
         let li = $('<li></li>')
         let a = $('<a target="_blank">Location</a>');
 
-        li.text(`${message.from}: `);
+        li.text(`${message.from} ${time}: `);
         a.attr('href', message.url);
 
         li.append(a);
