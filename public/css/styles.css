@@ -195,3 +195,10 @@
       margin-right: 0px;
     }
   }
+
+  @media screen and (max-width: 685px) {
+    #sidebar {
+    display: block !important;
+    width: 100%;
+    } 
+  }   
